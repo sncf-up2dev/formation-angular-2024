@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { interval } from 'rxjs';
 import { FormsModule } from '@angular/forms';
-import { names } from '../assets/persons';
+import { names } from '../utils/persons';
 
 @Component({
   selector: 'app-root',
