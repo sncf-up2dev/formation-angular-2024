@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
   selector: 'app-root',
   standalone: true,
   imports: [CommonModule],
-  template: `    
+  template: `
     <video #video>
       <source src="../assets/video.mp4"/>
     </video>
@@ -18,6 +18,10 @@ export class DomEventComponent {
 
   testVariable(video: HTMLVideoElement) {
     console.log(video)
+    if(video.paused) {
+      video.play()
+    } else {
+      video.pause()
+    }
   }
-
 }
