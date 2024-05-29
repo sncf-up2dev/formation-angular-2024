@@ -8,30 +8,31 @@ import { FormsModule } from '@angular/forms';
 
   selector: 'app-root',
   template: `
-    <div class="content example">
+      <div class="content example">
       <h1>Structural Directives</h1>
 
       <div class="box">
-        <ul>
-          <li>Hip, Hip, Hip, <div *ngIf="condition">Houra</div></li>
-          <li>Hip, Hip, Hip, <ng-container *ngIf="condition">Houra</ng-container></li>
-          <li>Hip, <ng-container>Hip,</ng-container> Hip, <ng-template [ngIf]="condition">Houra</ng-template></li>
-        </ul>
+          <ul>
+              <li>Hip, Hip, Hip, <div *ngIf="condition">Houra</div>
+              </li>
+              <li>Hip, Hip, Hip, <ng-container *ngIf="condition">Houra</ng-container></li>
+              <li>Hip, <ng-container>Hip,</ng-container> Hip, <ng-template [ngIf]="condition">Houra</ng-template></li>
+          </ul>
       </div>
 
       <div class="box">
           @if(numbers.length) {
-            <div>
-                [
-                <ng-container [class.red]="o" *ngFor="let item of numbers; let l=last; odd as o">
-                    {{ item }} <ng-container *ngIf="!l">,</ng-container>
-                </ng-container>
-                ]
-            </div>
+          <div>
+              [
+              <ng-container [class.red]="o" *ngFor="let item of numbers; let l=last; odd as o">
+                  {{ item }} <ng-container *ngIf="!l">,</ng-container>
+              </ng-container>
+              ]
+          </div>
           } @else {
-            <div>
+          <div>
               La liste est vide
-            </div>
+          </div>
           }
           <div class="button-row">
               <button (click)="push()">Push</button>

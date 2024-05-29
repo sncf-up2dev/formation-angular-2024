@@ -7,15 +7,13 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule],
   template: `
     <div class="content exercice">
-      <h1>Structural Directives</h1>
-
       <!-- Lorsque l'on clique dans l'élément, inverser l'état de state -->
-      <div class="box">
+      <div (click)="onClick()" class="box">
         {{ state }}
       </div>
 
       <!-- Lorsque l'on scrolle dans l'élément, incrémenter ou décrémenter la valeur de wheelCounter -->
-      <div class="box">
+      <div (wheel)="onWheel($event)" class="box">
         {{ wheelCounter }}
       </div>
 
@@ -23,7 +21,12 @@ import { CommonModule } from '@angular/common';
         - On maintient le clic 
         - On déplace la souris
         - On relache le clic -->
-      <div class="box"> 
+      <div class="box"
+        (mousedown)="onMouseDown($event)"
+        (mousemove)="onMouseMove($event)"
+        (mouseup)="onMouseUp($event)"
+        [style.transform]="getTranformation()"  
+      > 
         Drag Me !
       </div>
     </div>
@@ -33,9 +36,50 @@ import { CommonModule } from '@angular/common';
 })
 export class DomEventPartsComponent {
 
-  wheelCounter = 0
+  // Play/Pause
 
   state = false
+
+  onClick() {
+    this.state = !this.state
+  }
+
+  // Scroll
+
+  wheelCounter = 0
+
+  onWheel(event: WheelEvent) {
+    event.preventDefault()
+    event.deltaY < 0 ? this.wheelCounter-- : this.wheelCounter++
+  }
+
+  // Drag and drop
+
+  translation = { x: 0, y: 0 }
+  clickPosition = { x: 0, y: 0 }
+  isDragging = false
+
+  onMouseDown(event: MouseEvent) {
+    this.isDragging = true
+
+    this.clickPosition.x = event.pageX - this.translation.x
+    this.clickPosition.y = event.pageY - this.translation.y
+  }
+
+  onMouseUp(event: MouseEvent) {
+    this.isDragging = false
+  }
+
+  onMouseMove(event: MouseEvent) {
+    if (this.isDragging) {
+      this.translation.x = event.pageX - this.clickPosition.x
+      this.translation.y = event.pageY - this.clickPosition.y
+    }
+  }
+
+  getTranformation() {
+    return `translate(${this.translation.x}px, ${this.translation.y}px)`
+  }
 
 }
 
