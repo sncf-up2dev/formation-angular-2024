@@ -8,8 +8,8 @@ import { FormsModule } from '@angular/forms';
 })
 export class TronquePipe implements PipeTransform {
 
-  transform(value: any, ...args: any[]) {
-    throw new Error('Method not implemented.');
+  transform(value : string, length: number = 10): string {
+    return value.length > length ? value.slice(0, length) + '...' : value;
   }
 
 }
