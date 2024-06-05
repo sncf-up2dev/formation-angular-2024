@@ -1,4 +1,4 @@
-import { Component, Pipe, PipeTransform, forwardRef } from '@angular/core';
+import { Component, OnInit, Pipe, PipeTransform, forwardRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -6,11 +6,19 @@ import { FormsModule } from '@angular/forms';
   name: 'tronque',
   standalone: true
 })
-export class TronquePipe implements PipeTransform {
+export class TronquePipe {
 
-  transform(value: any, ...args: any[]) {
-    throw new Error('Method not implemented.');
+  transform(value: undefined | null, maxLength?: number): null
+  transform(value: string, maxLength?: number): string
+  transform(value: string | undefined | null, maxLength?: number): string | null
+  transform(value: string | undefined | null, maxLength: number = 10): string | null {
+    if (value == null) {
+      return null
+    }
+
+    return value.length > maxLength ? value.substring(0, maxLength) + '...' : value
   }
+
 
 }
 
@@ -23,7 +31,7 @@ export class TronquePipe implements PipeTransform {
     <div class="content exercice">
       <h1>TronquePipe</h1>
       <div class="box">
-        <input [(ngModel)]="texte">
+        <input [(ngModel)]="texte"> 
         <div>Texte original     : {{ texte }} </div>
         <div>Texte tronqué      : {{ texte | tronque }} </div>
         <div>Texte tronqué à 0  : {{ texte | tronque:0 }} </div>
@@ -34,5 +42,7 @@ export class TronquePipe implements PipeTransform {
   styles: ['']
 })
 export class PipeTronqueComponent {
-  texte = 'Mon texte'
+
+  texte?: string = "string"
+
 }

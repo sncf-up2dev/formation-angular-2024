@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 @Pipe({
   standalone: true,
-  name: 'sumPipe',
+  name: 'sumPipe'
 })
 export class SumPipe implements PipeTransform {
   transform(array: number[]): number {
@@ -39,14 +39,17 @@ export class PipeArrayComponent {
   tableau: number[] = [...Array(5)].map((_, index) => index)
 
   increment(index: number): void {
+    this.tableau = [...this.tableau]
     this.tableau[index] += 1
   }
 
   addElement(): void {
+    this.tableau = [...this.tableau]
     this.tableau.push(this.tableau.length)
   }
 
   removeElement(): void {
+    this.tableau = [...this.tableau]
     this.tableau.pop()
   }
 }

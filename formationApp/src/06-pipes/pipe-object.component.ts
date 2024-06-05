@@ -2,18 +2,16 @@ import { Component, Pipe, PipeTransform } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-export interface Personne {
+export type Person = {
   nom: string,
   prenom: string,
 }
 
 @Pipe({
   name: 'formatNom',
-  standalone: true,
+  standalone: true
 })
 export class FormatNomPipe implements PipeTransform {
-
-  state: number = 0
 
   transform(value: { prenom: string, nom: string }) {
     return `Bonjour ${value.prenom} ${value.nom} !`
@@ -27,7 +25,7 @@ export class FormatNomPipe implements PipeTransform {
 
   selector: 'app-root',
   template: `
-    <div class="content example">
+    <div class="content example" (mousemove)="0">
       <h1>Pipes et objets</h1>
       <div class="box">
         <div>{{ personne | formatNom }}</div>
@@ -41,7 +39,7 @@ export class FormatNomPipe implements PipeTransform {
 })
 export class PipesObjectComponent {
 
-  personne: Personne = {
+  personne: Person = {
     nom: 'Fry',
     prenom: 'Lucian'
   }

@@ -5,36 +5,28 @@
   <!-- Next Steps -->
   <h3>Liste des colis</h3>
 
-  <input type="hidden" #selection>
+  <colis-list />
+  <colis-detail />
+  <!-- A remplacer par <colis-list /> -->
 
   <div class="card-container">
-    <button class="card" (click)="selection.value = 'D1AB7E3C-5D23-D646-4375-9B7872B52289'" tabindex="0">
-      Lampe
+    @for (colis of colisList; track $index) {
+    <button class="card" (click)="selectedColis = colis" tabindex="0">
+      {{ colis.title }}
     </button>
-
-    <button class="card" (click)="selection.value = 'C9CE1525-59A7-577D-EE9E-B29065C0EB63'" tabindex="0">
-      Chaise
-    </button>
-
-    <button class="card" (click)="selection.value = '394DDD7E-E252-2DE4-9BF3-A2D0BC41C469'" tabindex="0">
-      Livre
-    </button>
-
-    <button class="card" (click)="selection.value = '3F87BC6E-81DE-71AF-945C-9072CE383E75'" tabindex="0">
-      Téléphone
-    </button>
+    }
   </div>
 
-  <!-- Terminal -->
+  <!-- A remplacer par <colis-details /> -->
   <h3>Details</h3>
-  <div class="box" [ngSwitch]="selection.value">
-    <div *ngSwitchDefault>cursus non, egestas a, dui. Cras pellentesque. Sed dictum. Proin</div>
-    <div *ngSwitchCase="'C9CE1525-59A7-577D-EE9E-B29065C0EB63'">ut aliquam iaculis, lacus pede sagittis augue, eu tempor
-      erat</div>
-    <div *ngSwitchCase="'394DDD7E-E252-2DE4-9BF3-A2D0BC41C469'">auctor velit. Aliquam nisl. Nulla eu neque pellentesque
-      massa lobortis</div>
-    <div *ngSwitchCase="'3F87BC6E-81DE-71AF-945C-9072CE383E75'">imperdiet dictum magna. Ut tincidunt orci quis lectus.
-      Nullam suscipit</div>
+  <div class="box">
+    <div>
+      @if(selectedColis) {
+      {{ selectedColis.details }}
+      } @else {
+      Aucun colis sélectionné
+      }
+    </div>
   </div>
 
 </div>
