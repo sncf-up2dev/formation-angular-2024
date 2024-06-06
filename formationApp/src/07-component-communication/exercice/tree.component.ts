@@ -9,20 +9,31 @@ import { FolderComponent } from "./folder.component";
 
     selector: 'app-tree',
     template: `
-    <div class="folder">
-
-    </div>
+      <div class="folder">
+        <div (click)="toggle()">
+          {{ tree.value }}
+        </div>
+        @if (isExpended) {
+          @for (child of tree.children; track child) {
+            <app-tree [tree]="child"></app-tree>
+          }
+        }
+      </div>
     `,
     styles: `
         :host {
             width: 100%
-        }    
-        
+        }
+
         .folder {
             padding: 1rem;
             position: relative;
             background-color: var(--box);
-            border: solid
+            border: solid;
+
+          &:hover {
+            cursor: pointer;
+        }
         }
     `
 })
@@ -30,7 +41,11 @@ export class TreeComponent {
 
     /* Ce fichier peut être librement modifié pour l'exercice (template et composant) */
 
-    @Input({ required: true })
-    tree!: Tree
+  @Input({ required: true }) tree!: Tree
+  isExpended = false
+
+  toggle() {
+    this.isExpended = !this.isExpended
+  }
 
 }
