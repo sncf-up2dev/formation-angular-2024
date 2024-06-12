@@ -37,7 +37,7 @@ import { CommonModule } from '@angular/common';
 export class HtmldomComponent {
 
   condition: boolean = true;
-  conditionAttr = "bonjour"
+  conditionAttr = "undefined"
 
   modifyHTML(element: HTMLInputElement) {
     element.setAttribute('VaLuE', element.value);

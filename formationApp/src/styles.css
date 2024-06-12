@@ -5,6 +5,7 @@
     --foreground: hsl(60, 30%, 96%);
     --button: hsl(225, 27%, 51%);
     --box: hsl(231, 15%, 10%);
+    --border: hsl(226, 13%, 34%);
 
     --cyan: hsl(191, 97%, 77%);
     --green: hsl(135, 94%, 65%);
@@ -114,8 +115,14 @@ button {
     padding: 1rem;
     margin: 0;
     position: relative;
-    width: 90%;
+    width: 96%;
     border-radius: 6px;
     margin-top: 8px;
     background-color: var(--box)
+}
+
+.box-border {
+    position: relative;
+    border: solid;
+    border-color: var(--border);
 }

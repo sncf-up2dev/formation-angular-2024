@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   template: `
-    <div class="box">
+    <div class="box box-border">
       <div>Valeur dans le fils : {{value}} <button (click)="addValue()">Value++</button></div>
     </div>
   `,
@@ -37,7 +37,6 @@ export class ChildIOComponent {
       <div class="box">
         <div>Valeur dans le père : {{value}} <button (click)="addValue()">Value++</button> </div>
         
-        <app-child [value]="value" (valueChange)="value=$event"> </app-child>
         <app-child [(value)]="value"> </app-child>
       </div>
     </div>

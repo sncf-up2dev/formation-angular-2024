@@ -1,12 +1,13 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { CounterService } from '../08-dependency-injection/dependency-injection.service';
 
 @Component({
   selector: 'app-child',
   standalone: true,
   imports: [CommonModule],
   template: `
-    <div class="box">
+    <div class="box box-border">
       <div>Valeur dans le fils : {{value}} <button (click)="addValue()">Value++</button></div>
     </div>
   `,
@@ -52,5 +53,4 @@ export class ParentOutputComponent {
   addValue() {
     this.value++
   }
-
 }

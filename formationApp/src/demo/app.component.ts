@@ -1,5 +1,4 @@
-import { Component, Input } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component } from '@angular/core';
 import { Colis, colisList } from '../utils/colis';
 
 @Component({

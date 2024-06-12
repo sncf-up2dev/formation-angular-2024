@@ -2,15 +2,21 @@ import { CommonModule } from "@angular/common";
 import { Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, booleanAttribute, inject } from "@angular/core";
 import { Tree } from "./tree";
 import { FolderComponent } from "./folder.component";
+import { FormsModule } from "@angular/forms";
 
 @Component({
     standalone: true,
-    imports: [CommonModule],
+    imports: [CommonModule, FormsModule],
 
     selector: 'app-tree',
     template: `
-    <div class="folder">
-
+    <div (click)="onClick($event)" class="folder">
+        <input [(ngModel)]="tree.value" />
+        @if(expanded) {
+            @for (child of tree.children; track $index) {
+                <app-tree [tree]="child"/>
+            }
+        }
     </div>
     `,
     styles: `
@@ -32,5 +38,12 @@ export class TreeComponent {
 
     @Input({ required: true })
     tree!: Tree
+
+    expanded = false
+
+    onClick(event: Event) {
+        event.stopPropagation()
+        this.expanded = !this.expanded
+    }
 
 }

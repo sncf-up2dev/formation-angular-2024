@@ -6,11 +6,10 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   template: `
-      <div class="box">
+      <div class="box box-border">
         <div>Valeur dans le fils : {{value}} <button (click)="addValue()">Value++</button></div>
       </div>
-  `,
-  styles: ['']
+  `
 })
 export class ChildInputComponent {
 
@@ -37,8 +36,7 @@ export class ChildInputComponent {
         <app-child [value]="value"> </app-child>
     </div>
   </div>
-  `,
-  styles: ['']
+  `
 })
 export class ParentInputComponent {
 

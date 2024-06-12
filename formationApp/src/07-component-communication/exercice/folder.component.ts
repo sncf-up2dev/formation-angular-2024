@@ -36,4 +36,8 @@ export class FolderComponent {
         ]
     )
 
+    constructor() {
+        this.folder.children[0].children[0].children.push(this.folder)
+    }
+
 }

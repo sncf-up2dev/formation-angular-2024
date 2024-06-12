@@ -5,28 +5,10 @@
   <!-- Next Steps -->
   <h3>Liste des colis</h3>
 
-  <colis-list />
-  <colis-detail />
-  <!-- A remplacer par <colis-list /> -->
+  <colis-list [list]="colisList" key="title" (onClick)="selectedColis = $event" />
 
-  <div class="card-container">
-    @for (colis of colisList; track $index) {
-    <button class="card" (click)="selectedColis = colis" tabindex="0">
-      {{ colis.title }}
-    </button>
-    }
-  </div>
-
-  <!-- A remplacer par <colis-details /> -->
   <h3>Details</h3>
-  <div class="box">
-    <div>
-      @if(selectedColis) {
-      {{ selectedColis.details }}
-      } @else {
-      Aucun colis sélectionné
-      }
-    </div>
-  </div>
+
+  <colis-detail [selectedColis]="selectedColis" />
 
 </div>
