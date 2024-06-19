@@ -1,7 +1,6 @@
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { DependencyInjectionComponent, DependencyInjectionFatherComponent, DependencyInjectionChildComponent } from "./dependency-injection.component";
-import { CounterService } from "./dependency-injection.service";
 
 @NgModule({
     declarations: [
@@ -13,7 +12,7 @@ import { CounterService } from "./dependency-injection.service";
         BrowserModule
     ],
     providers: [
-        CounterService
+
     ],
     bootstrap: [
         DependencyInjectionComponent

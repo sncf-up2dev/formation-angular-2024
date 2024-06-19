@@ -126,3 +126,7 @@ button {
     border: solid;
     border-color: var(--border);
 }
+
+.shared {
+    color: var(--foreground);
+}

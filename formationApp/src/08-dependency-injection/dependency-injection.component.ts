@@ -1,6 +1,6 @@
 /* Root Component */
 
-import { Component, inject, Optional } from "@angular/core"
+import { Component, inject } from "@angular/core"
 import { CounterService } from "./dependency-injection.service"
 
 @Component({
@@ -9,7 +9,6 @@ import { CounterService } from "./dependency-injection.service"
 
     selector: 'app-root',
     template: `
-    
         <div class="content example">
             <h1>Injection de dépendances</h1>
 
@@ -30,7 +29,6 @@ export class DependencyInjectionComponent {
 
 @Component({
     providers: [
-        CounterService
     ],
 
     selector: 'app-father',
@@ -68,7 +66,7 @@ export class DependencyInjectionFatherComponent {
     template: `
     <div class="box box-border">
       ChildComponent :
-      <div>compteur 1 : {{firstCounterService.value}} <button (click)="increment1()">Increment 1</button> </div>
+      <div>compteur 1 : {{firstCounterService?.value}} <button (click)="increment1()">Increment 1</button> </div>
       <div>compteur 2 : {{secondCounterService.value}} <button (click)="increment2()">Increment 2</button></div>
     </div>
   `,
@@ -80,7 +78,7 @@ export class DependencyInjectionChildComponent {
     secondCounterService = inject(CounterService)
 
     increment1() {
-        this.firstCounterService.incrementValue()
+        this.firstCounterService?.incrementValue()
     }
 
     increment2() {
