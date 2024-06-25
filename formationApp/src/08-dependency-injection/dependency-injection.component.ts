@@ -1,11 +1,17 @@
 /* Root Component */
 
-import { Component, inject } from "@angular/core"
-import { CounterService } from "./dependency-injection.service"
+import {Component, Inject, inject, Optional, SkipSelf} from "@angular/core"
+import {
+  BetterCounterService,
+  CounterService,
+  MinimalCounterService,
+  SECOND_COUNTER_TOKEN
+} from "./dependency-injection.service"
 
 @Component({
-    providers: [
-    ],
+  providers: [
+
+  ],
 
     selector: 'app-root',
     template: `
@@ -29,6 +35,7 @@ export class DependencyInjectionComponent {
 
 @Component({
     providers: [
+       CounterService
     ],
 
     selector: 'app-father',
@@ -47,11 +54,10 @@ export class DependencyInjectionComponent {
 export class DependencyInjectionFatherComponent {
 
     constructor(
-        public counterService: CounterService,
-    ) { }
+        public counterService: MinimalCounterService){}
 
     increment() {
-        this.counterService.incrementValue()
+     // this.counterService.incrementValue()
     }
 }
 
@@ -60,6 +66,7 @@ export class DependencyInjectionFatherComponent {
 
 @Component({
     providers: [
+       CounterService
     ],
 
     selector: 'app-child',
@@ -74,8 +81,11 @@ export class DependencyInjectionFatherComponent {
 })
 export class DependencyInjectionChildComponent {
 
-    firstCounterService = inject(CounterService)
-    secondCounterService = inject(CounterService)
+    firstCounterService = inject(CounterService , {
+        optional: true,
+        skipSelf: true
+    })
+    secondCounterService = inject(BetterCounterService)
 
     increment1() {
         this.firstCounterService?.incrementValue()
