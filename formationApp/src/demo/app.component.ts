@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { Colis, colisList } from '../utils/colis';
+import {Component, inject, Inject} from '@angular/core';
+import {ColisService} from "./colis.service";
+import {Colis} from "../utils/colis";
 
 @Component({
   selector: 'app-root',
@@ -8,11 +9,12 @@ import { Colis, colisList } from '../utils/colis';
 })
 export class AppComponent {
 
+  colisService = inject(ColisService)
+
   title = 'Torticolis';
 
-  colisList = colisList
+  colisList: Colis[] = this.colisService.getColisList()
 
   selectedColis?: Colis = undefined
-
 
 }
