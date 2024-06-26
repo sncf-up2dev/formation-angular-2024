@@ -1,11 +1,12 @@
 import { Injectable, InjectionToken } from '@angular/core';
 
-export const SECOND_COUNTER_TOKEN = new InjectionToken<CounterService>('Second counter')
-
-@Injectable({
-    providedIn: 'root'
+export const SECOND_COUNTER_TOKEN = new InjectionToken<CounterService>('Second counter', {
+    providedIn: 'root',
+    factory: () => new BetterCounterService()
 })
-export class CounterService {
+
+@Injectable()
+export class CounterService /* extends MinimalCounterService */ {
 
     value = 0
 
@@ -42,6 +43,7 @@ export class BetterCounterService extends CounterService {
 export abstract class MinimalCounterService {
     abstract value: number;
 }
+
 
 // UseValue
 

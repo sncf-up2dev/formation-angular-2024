@@ -1,7 +1,7 @@
 /* Root Component */
 
-import { Component, inject } from "@angular/core"
-import { CounterService } from "./dependency-injection.service"
+import { Component, Optional, SkipSelf, inject } from "@angular/core"
+import { CounterService, MinimalCounterService, SECOND_COUNTER_TOKEN } from "./dependency-injection.service"
 
 @Component({
     providers: [
@@ -29,6 +29,8 @@ export class DependencyInjectionComponent {
 
 @Component({
     providers: [
+        CounterService,
+        { provide: MinimalCounterService, useExisting: CounterService }
     ],
 
     selector: 'app-father',
@@ -36,7 +38,7 @@ export class DependencyInjectionComponent {
     <div class="box box-border">
         FatherComponent
         <div>
-            compteur : {{counterService.value}} <button (click)="increment()">++</button>
+            compteur : {{counterService.value}}
         </div>
         <app-child></app-child>
         <app-child></app-child>
@@ -47,12 +49,9 @@ export class DependencyInjectionComponent {
 export class DependencyInjectionFatherComponent {
 
     constructor(
-        public counterService: CounterService,
+        public counterService: MinimalCounterService,
     ) { }
 
-    increment() {
-        this.counterService.incrementValue()
-    }
 }
 
 
@@ -66,7 +65,7 @@ export class DependencyInjectionFatherComponent {
     template: `
     <div class="box box-border">
       ChildComponent :
-      <div>compteur 1 : {{firstCounterService?.value}} <button (click)="increment1()">Increment 1</button> </div>
+      <div>compteur 1 : {{firstCounterService.value}} <button (click)="increment1()">Increment 1</button> </div>
       <div>compteur 2 : {{secondCounterService.value}} <button (click)="increment2()">Increment 2</button></div>
     </div>
   `,
@@ -74,11 +73,18 @@ export class DependencyInjectionFatherComponent {
 })
 export class DependencyInjectionChildComponent {
 
-    firstCounterService = inject(CounterService)
-    secondCounterService = inject(CounterService)
+    secondCounterService = inject(SECOND_COUNTER_TOKEN)
+
+    constructor(
+        @Optional() @SkipSelf() public firstCounterService: CounterService
+    ) {
+        if (this.firstCounterService === null) {
+            this.firstCounterService = new CounterService()
+        }
+    }
 
     increment1() {
-        this.firstCounterService?.incrementValue()
+        this.firstCounterService.incrementValue()
     }
 
     increment2() {

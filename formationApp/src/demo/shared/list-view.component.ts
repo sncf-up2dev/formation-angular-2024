@@ -1,7 +1,9 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { Component, EventEmitter, Input, Output, inject } from "@angular/core";
+import { ColisService } from "../features/colis/colis.service";
 
 @Component({
-  selector: 'colis-list',
+  selector: 'list-view',
+  standalone: true,
   template: `
       <div class="card-container">
         @for (item of list; track $index) {
@@ -11,9 +13,8 @@ import { Component, EventEmitter, Input, Output } from "@angular/core";
         }
       </div>
     `,
-  styleUrls: ['./app.component.scss']
 })
-export class ColisListComponent<T, K extends keyof T> {
+export class ListViewComponent<T, K extends keyof T> {
 
   @Input({ required: true })
   list!: T[]
@@ -25,3 +26,4 @@ export class ColisListComponent<T, K extends keyof T> {
   onClick = new EventEmitter<T>()
 
 }
+

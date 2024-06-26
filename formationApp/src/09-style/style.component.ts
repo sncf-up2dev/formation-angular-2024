@@ -15,7 +15,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
       <app-none />
 
     </div>
-  `
+  `,
 })
 export class StyleRootComponent {
 
