@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { colisList } from "../../../utils/colis";
+import { colisList } from "../../../../utils/colis";
 
 @Injectable({
     providedIn: 'root'

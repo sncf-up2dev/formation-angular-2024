@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output, inject } from "@angular/core";
-import { ColisService } from "../features/colis/colis.service";
+import { ColisService } from "../features/colis/services/colis.service";
 
 @Component({
   selector: 'list-view',

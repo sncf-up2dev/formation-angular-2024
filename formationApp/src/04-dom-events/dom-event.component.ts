@@ -1,4 +1,4 @@
-import { Component, Pipe, PipeTransform } from '@angular/core';
+import { Component, ElementRef, Pipe, PipeTransform, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -7,8 +7,8 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule],
   template: `    
     <video #video
-      (click)="onClick(video)"
-      (wheel)="onWheel($event, video)"
+      (click)="onClick()"
+      (wheel)="onWheel($event)"
       (mousedown)="onMouseDown($event)"
       (mousemove)="onMouseMove($event)"
       (mouseup)="onMouseUp($event)"
@@ -20,19 +20,29 @@ import { CommonModule } from '@angular/common';
 })
 export class DomEventComponent {
 
+  @ViewChild('video')
+  videoElement?: ElementRef<HTMLVideoElement>
+
   // Play/Pause
 
-  onClick(media: HTMLMediaElement) {
+  onClick() {
     if (!this.wasDragged) {
-      media.paused ? media.play() : media.pause()
+      this.videoElement?.nativeElement.paused
+        ? this.videoElement?.nativeElement.play()
+        : this.videoElement?.nativeElement.pause()
     }
   }
 
   // Scroll
 
-  onWheel(event: WheelEvent, media: HTMLMediaElement) {
+  onWheel(event: WheelEvent) {
     event.preventDefault()
-    event.deltaY < 0 ? media.currentTime-- : media.currentTime++
+
+    if (this.videoElement) {
+      event.deltaY < 0
+        ? this.videoElement.nativeElement.currentTime--
+        : this.videoElement.nativeElement.currentTime++
+    }
   }
 
   // Drag and drop

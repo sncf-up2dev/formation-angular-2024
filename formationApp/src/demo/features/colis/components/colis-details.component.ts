@@ -1,5 +1,5 @@
 import { Component, Input } from "@angular/core";
-import { Colis } from "../../../utils/colis";
+import { Colis } from "../../../../utils/colis";
 
 @Component({
   selector: 'colis-detail',

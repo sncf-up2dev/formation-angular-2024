@@ -10,27 +10,22 @@ import { FormsModule } from "@angular/forms";
 
     selector: 'app-tree',
     template: `
-    <div (click)="onClick($event)" class="folder">
-        <input [(ngModel)]="tree.value" />
-        @if(expanded) {
-            @for (child of tree.children; track $index) {
-                <app-tree [tree]="child"/>
-            }
+    <input (click)="$event.stopPropagation()" [(ngModel)]="tree.value" />
+    @if(expanded) {
+        @for (child of tree.children; track $index) {
+            <app-tree [tree]="child"/>
         }
-    </div>
+    }
     `,
     styles: `
         :host {
-            width: 100%
-        }    
-        
-        .folder {
-            padding: 1rem;
-            position: relative;
-            background-color: var(--box);
-            border: solid
+            display: block;   
         }
-    `
+    `,
+    host: {
+        'class': 'box box-border',
+        '(click)': 'onClick($event)',
+    }
 })
 export class TreeComponent {
 

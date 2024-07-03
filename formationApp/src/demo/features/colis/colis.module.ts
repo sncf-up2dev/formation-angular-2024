@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
-import { ColisDetailsComponent } from './colis-details.component';
+import { ColisDetailsComponent } from './components/colis-details.component';
 import { ListViewComponent } from '../../shared/list-view.component';
-import { ColisComponent } from './colis.component';
+import { ColisComponent } from './components/colis.component';
 
 @NgModule({
     declarations: [

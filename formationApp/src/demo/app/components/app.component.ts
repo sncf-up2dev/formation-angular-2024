@@ -1,4 +1,5 @@
 import { Component, inject } from '@angular/core';
+import { environment } from '../../../environments/environment';
 
 export type Feature = 'COLIS' | 'LIVRAISONS'
 
@@ -38,7 +39,7 @@ export type Feature = 'COLIS' | 'LIVRAISONS'
 })
 export class AppComponent {
 
-  title = 'Torticolis';
+  title = environment.title;
 
   selectedFeature: Feature = "LIVRAISONS"
 

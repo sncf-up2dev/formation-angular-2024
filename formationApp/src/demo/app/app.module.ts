@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { AppComponent } from './app.component';
+import { AppComponent } from './components/app.component';
 import { ColisModule } from '../features/colis/colis.module';
 import { LivraisonsModule } from '../features/livraisons/livraisons.module';
 

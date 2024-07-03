@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
-import { Colis } from '../../../utils/colis';
-import { ColisService } from './colis.service';
+import { Colis } from '../../../../utils/colis';
+import { ColisService } from '../services/colis.service';
 
 @Component({
     selector: 'colis-root',
