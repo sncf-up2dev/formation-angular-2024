@@ -80,13 +80,13 @@ export class ViewChildComponent implements OnInit {
     setTimeout(() => this.audioRef?.nativeElement.pause(), 3000)
   }
 
+  /* ViewQueries */
+
   @ViewChild(ChildComponent)
   childComponent?: ChildComponent
 
   @ViewChild(CounterService)
   counterService?: CounterService
-
-  /* ViewQueries sur les éléments du composant fils */
 
   @ViewChild(ChildComponent, { read: ElementRef })
   childRef!: ElementRef<HTMLElement>
