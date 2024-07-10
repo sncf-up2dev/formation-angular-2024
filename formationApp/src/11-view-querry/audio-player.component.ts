@@ -1,6 +1,5 @@
-import { AfterViewChecked, AfterViewInit, Component, DoCheck, ElementRef, QueryList, ViewChildren } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, DoCheck, ElementRef, QueryList, ViewChild, ViewChildren, viewChildren } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { interval } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -13,11 +12,11 @@ import { interval } from 'rxjs';
       <button (click)="addTrack()">Ajouter</button>
       <button (click)="removeTrack()">Supprimer</button>
     </div>
-    <div class="box">
 
+    <div class="box">
       @for (source of sources; track $index) {
         <div>
-          <audio #audio controls [src]="source" ></audio> 
+          <audio #audio [src]="source" ></audio> 
           <button (click)="playPause(audio)">Play / Pause</button>
         </div>
       }
@@ -33,6 +32,11 @@ import { interval } from 'rxjs';
 })
 export class AudioPlayerComponent {
 
+  button = false
+
+  @ViewChildren('audio')
+  audioPlayers?: QueryList<ElementRef<HTMLAudioElement>>
+
   sources: string[] = [
     "../assets/sample.mp3",
     "../assets/sample.mp3",
@@ -42,6 +46,7 @@ export class AudioPlayerComponent {
 
   addTrack() {
     this.sources.push("../assets/sample.mp3")
+    this.button = true
   }
 
   removeTrack() {
@@ -49,7 +54,14 @@ export class AudioPlayerComponent {
   }
 
   playPause(audio: HTMLAudioElement) {
-
+    if (audio.paused) {
+      this.audioPlayers?.forEach(
+        (audioPlayer) => audioPlayer.nativeElement.pause()
+      )
+      audio.play()
+    } else {
+      audio.pause()
+    }
   }
 
 }
