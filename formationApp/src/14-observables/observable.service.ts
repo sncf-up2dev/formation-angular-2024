@@ -10,7 +10,9 @@ export class ObservableService {
 
   readonly observable = new Observable<number>((subscriber) => {
     console.log("Debut de l'execution de l'observable")
-    subscriber.next(0);
+    setTimeout(() => {
+      subscriber.next(1);
+    }, 2000);
     var interval = setInterval(() => {
       console.log("setInterval de l'observable")
       subscriber.next(5);
