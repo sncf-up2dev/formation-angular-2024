@@ -18,7 +18,20 @@ export class ObservableService {
     return () => clearInterval(interval)
   });
 
-  readonly personObservable = new Observable<Person>((subscriber) => {
+  readonly clock$ = new Observable<number>((subscriber) => {
+    let value = 0
+    console.log("Debut de l'execution d'horloge")
+    //subscriber.next(value);
+    var interval = setInterval(() => {
+      value++
+      console.log("setInterval de l'horloge " + value)
+      subscriber.next(value);
+    }, 1000);
+    return () => clearInterval(interval)
+  });
+
+  readonly person$ = new Observable<Person>((subscriber) => {
+    console.log("Debut de l'execution de personne")
     subscriber.next(getRandomPerson())
     subscriber.complete()
   })

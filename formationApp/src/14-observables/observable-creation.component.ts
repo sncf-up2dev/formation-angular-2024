@@ -1,5 +1,5 @@
 import { Component, inject } from "@angular/core";
-import { Observer, Subscription } from "rxjs";
+import { Observer, Subscription, of } from "rxjs";
 import { ObservableService } from "./observable.service";
 import { CommonModule } from "@angular/common";
 import { HooksComponent } from "../12-lifecycle-hooks/hooks.component";
@@ -11,7 +11,6 @@ import { HooksComponent } from "../12-lifecycle-hooks/hooks.component";
     standalone: true,
     selector: 'app-root',
     template: `
-    <div class="content example">
         <h1>Observables</h1>
 
         <!-- Ici le div n'est pas affiché lorsque l'observable émet 0, car c'est une valeur 'falsy' -->
@@ -19,13 +18,13 @@ import { HooksComponent } from "../12-lifecycle-hooks/hooks.component";
             Consumer : {{ value }}
         </div>
 
-        @if(observableService.personObservable | async; as person) {
+        @if(observableService.person$ | async; as person) {
             <app-hook [inputPerson]="person" />
         }
-
-    </div>
-  `,
-    styleUrls: []
+    `,
+    host: {
+        'class': 'content example'
+    }
 })
 export class ObservableCreationComponent {
 
@@ -36,5 +35,4 @@ export class ObservableCreationComponent {
         error: err => console.error('Observer got an error: ' + err),
         complete: () => console.log('Observer got a complete notification'),
     };
-
 }

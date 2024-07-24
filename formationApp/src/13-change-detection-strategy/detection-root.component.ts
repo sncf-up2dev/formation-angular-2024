@@ -14,11 +14,6 @@ import { getRandomPerson } from '../utils/persons';
       <button (click)="newPerson()">Mutate</button>
     </div>
   `,
-  styles: `
-    :host {
-      display: block;
-    }
-  `,
   host: {
     'class': 'content example'
   },
