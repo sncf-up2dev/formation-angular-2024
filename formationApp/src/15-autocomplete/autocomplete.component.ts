@@ -13,7 +13,7 @@ import { Client } from '../utils/client';
       <h1>Composant Autocomplete</h1>
 
       <div class="box">
-        <input #input/><button (click)="clientRequest($event)">Rechercher</button>
+        <input #input/>
       </div>
       <div class="box">
         <div *ngFor="let client of clients$ | async"> 
@@ -25,16 +25,20 @@ import { Client } from '../utils/client';
   styles: `
   `
 })
-export class AutocompleteComponent {
+export class AutocompleteComponent implements AfterViewInit {
 
   clientService = inject(ClientService)
 
   @ViewChild('input')
   inputElement!: ElementRef<HTMLInputElement>
 
+  inputEvent$?: Observable<Event>
   clients$?: Observable<Client[]>
 
-  clientRequest(event: Event) {
-
+  ngAfterViewInit(): void {
+    this.inputEvent$ = fromEvent(this.inputElement.nativeElement, 'input')
+    this.inputEvent$.subscribe(
+      ev => this.clients$ = this.clientService.getFilteredSortedClients((ev.target as HTMLInputElement).value)
+    )
   }
 }
