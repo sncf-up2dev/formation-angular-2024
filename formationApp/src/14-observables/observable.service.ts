@@ -33,6 +33,29 @@ export class ObservableService {
     }
   });
 
+  count = 0
+
+  getNameClock = () => new Observable<string>((subscriber) => {
+    let value = 0
+    let name = this.count
+    this.count++
+
+    console.log("Debut de l'execution d'horloge " + name)
+    subscriber.next(`Counter ${name} - value ${value}`);
+    var interval = setInterval(() => {
+      value++
+      console.log(`setInterval de l'horloge ${name} - ${value}`)
+      subscriber.next(`Counter ${name} - value ${value}`);
+      if (value > 4) {
+        subscriber.complete()
+      }
+    }, 1000);
+    return () => {
+      console.log("Fin de l'execution d'horloge " + name)
+      clearInterval(interval)
+    }
+  });
+
   readonly person$ = new Observable<Person>((subscriber) => {
     console.log("Debut de l'execution de personne")
     subscriber.next(getRandomPerson())
