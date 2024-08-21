@@ -320,5 +320,22 @@
 			"author": "sncf",
 			"public": "false"
 		}
+	],
+	"fruits": [
+		{
+			"id": 1,
+			"name": "Pomme",
+			"price": 1
+		},
+		{
+			"id": 2,
+			"name": "Banane",
+			"price": 2
+		},
+		{
+			"id": 3,
+			"name": "Fraise",
+			"price": 1
+		}
 	]
 }

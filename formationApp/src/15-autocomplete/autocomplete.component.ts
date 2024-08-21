@@ -36,7 +36,11 @@ export class AutocompleteComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.clients$ = fromEvent(this.inputElement.nativeElement, 'input').pipe(
-      switchMap(ev => this.clientService.getFilteredSortedClients((ev.target as HTMLInputElement).value)),
+      debounceTime(300),
+      map(ev => (ev.target as HTMLInputElement).value),
+      distinctUntilChanged(),
+      filter(input => input.length >= 2),
+      switchMap(input => this.clientService.getFilteredSortedClients(input))
     )
   }
 }

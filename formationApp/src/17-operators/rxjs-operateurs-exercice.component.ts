@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren, inject } from '@angular/core';
-import { EMPTY, Observable, OperatorFunction, concatMap, count, exhaustAll, exhaustMap, filter, first, from, fromEvent, interval, last, map, mergeMap, of, range, reduce, scan, startWith, switchMap, take, takeLast, takeUntil, takeWhile, tap, timer } from 'rxjs';
+import { EMPTY, Observable, OperatorFunction, concatMap, count, exhaustAll, exhaustMap, filter, first, from, fromEvent, interval, last, map, mergeMap, of, range, reduce, scan, startWith, switchMap, take, takeLast, takeUntil, takeWhile, tap, timeout, timer } from 'rxjs';
 import { ObservableService } from '../14-observables/observable.service';
 
 @Component({
@@ -29,25 +29,17 @@ export class RxjsOperateursExerciceComponent implements AfterViewInit {
 
     visibility = false
 
-    obsService = inject(ObservableService)
-
-    @ViewChild('button')
-    eventButton!: ElementRef<HTMLButtonElement>
-
-    obs$ = this.obsService.clock$.pipe(
-        tap(v => console.log(v))
-    )
-
     click$?: Observable<Event>
-
-    game$?: Observable<number>
+    game$?: Observable<number | string>
 
     ngAfterViewInit(): void {
         this.click$ = fromEvent(document, 'click')
 
         this.game$ = this.click$.pipe(
-            takeUntil(this.obsService.clock$),
-            map(_ => 1)
+            map(_ => 1),
+            takeUntil(timer(5000)),
+            reduce((acc, val) => acc + val),
+            startWith("Counting...")
         )
     }
 

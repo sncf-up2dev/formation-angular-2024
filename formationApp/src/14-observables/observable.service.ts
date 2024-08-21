@@ -16,7 +16,7 @@ export class ObservableService {
       subscriber.next(5);
     }, 5000);
     return () => clearInterval(interval)
-  });
+  })
 
   readonly clock$ = new Observable<number>((subscriber) => {
     let value = 0
@@ -31,7 +31,7 @@ export class ObservableService {
       console.log("Fin de l'execution d'horloge")
       clearInterval(interval)
     }
-  });
+  })
 
   count = 0
 
@@ -54,12 +54,34 @@ export class ObservableService {
       console.log("Fin de l'execution d'horloge " + name)
       clearInterval(interval)
     }
-  });
+  })
 
   readonly person$ = new Observable<Person>((subscriber) => {
     console.log("Debut de l'execution de personne")
     subscriber.next(getRandomPerson())
     subscriber.complete()
+  })
+
+  value = 0
+
+  getHotClock = () => new Observable<number>((subscriber) => {
+    console.log("Debut de l'execution d'horloge partagée")
+    subscriber.next(this.value);
+    var interval = setInterval(() => {
+      this.value++
+      console.log("setInterval de l'horloge partagée " + this.value)
+      subscriber.next(this.value);
+    }, 5000);
+    return () => {
+      console.log("Fin de l'execution d'horloge partagée")
+      clearInterval(interval)
+    }
+  })
+
+  readonly error$ = new Observable<string>((subscriber) => {
+    console.log("Debut de l'execution de error")
+    subscriber.next("Value")
+    subscriber.error("Erreur !")
   })
 
 }
