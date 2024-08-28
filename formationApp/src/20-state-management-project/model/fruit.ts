@@ -1,6 +1,6 @@
 export type Fruit = {
     id: number
-    name: number
+    name: string
     price: number
 }
 
