@@ -42,10 +42,10 @@ export class CartService {
   - Implémenter un observable total$, qui renvoie le prix total du panier 
   */
   nbArticles$: Observable<number> = this.cart$.pipe(
-    map(state => state.reduce((acc, val) => acc + val.quantity, 0))
+    map(cart => cart.reduce((acc, val) => acc + val.quantity, 0))
   )
   total$: Observable<number> = this.cart$.pipe(
-    map(state => state.reduce((acc, val) => acc + val.quantity * val.price, 0))
+    map(cart => cart.reduce((acc, val) => acc + val.quantity * val.price, 0))
   )
 
   /* /!\ Pour les méthodes addFruit(), removeFruit() et removeAllFruitOfType(), attention à ne pas muter la Map existante */
