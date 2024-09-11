@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output, inject } from "@angular/core";
-import { ColisService } from "../features/colis/services/colis.service";
 
 @Component({
   selector: 'list-view',
@@ -16,8 +15,8 @@ import { ColisService } from "../features/colis/services/colis.service";
 })
 export class ListViewComponent<T, K extends keyof T> {
 
-  @Input({ required: true })
-  list!: T[]
+  @Input()
+  list: T[] | null = null
 
   @Input()
   key?: K

@@ -98,6 +98,11 @@ button {
     line-height: 24px;
 }
 
+.card-selected {
+    border: 1px solid red;
+    color: red;
+}
+
 .card-container .card:not(:last-child) {
     margin-right: 0;
 }

@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { LivraisonsComponent } from './livraisons.component';
-import { ListViewComponent } from '../../shared/list-view.component';
+import { CommonModule } from '@angular/common';
+import { LivraisonsRoutingModule } from './livraisons.routing.module';
 
 @NgModule({
     declarations: [
         LivraisonsComponent
     ],
-    imports: [],
+    imports: [CommonModule, LivraisonsRoutingModule],
     providers: [],
     exports: [LivraisonsComponent]
 })

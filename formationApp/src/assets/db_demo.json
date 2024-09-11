@@ -1,0 +1,50 @@
+{
+  "colis": [
+    {
+      "title": "Lampe",
+      "address": "248-7407 Bibendum. Av.",
+      "email": "a@icloud.net",
+      "id": "D1AB7E3C-5D23-D646",
+      "details": "cursus non, egestas a, dui. Cras pellentesque. Sed dictum. Proin",
+      "deliveryPersonId": 8
+    },
+    {
+      "title": "Chaise",
+      "address": "3475 Nascetur Rd.",
+      "email": "cras.pellentesque@yahoo.org",
+      "id": "C9CE1525-59A7-577D-EE9E-B29065C0EB63",
+      "details": "ut aliquam iaculis, lacus pede sagittis augue, eu tempor erat",
+      "deliveryPersonId": 1
+    },
+    {
+      "title": "Livre",
+      "address": "6638 Sem Street",
+      "email": "ornare.placerat.orci@icloud.net",
+      "id": "394DDD7E-E252-2DE4",
+      "details": "auctor velit. Aliquam nisl. Nulla eu neque pellentesque massa lobortis",
+      "deliveryPersonId": 5
+    },
+    {
+      "title": "Téléphone",
+      "address": "P.O. Box 283, 3500 Et Ave",
+      "email": "senectus.et.netus@yahoo.com",
+      "id": "3F87BC6E-81DE-71AF",
+      "details": "imperdiet dictum magna. Ut tincidunt orci quis lectus. Nullam suscipit,",
+      "deliveryPersonId": 9
+    }
+  ],
+  "livraisons": [
+    {
+      "id": 1,
+      "colisId": "3F87BC6E-81DE-71AF",
+      "date": "2024-09-11T09:00:00.511Z"
+    }
+  ],
+  "users": [
+    {
+      "email": "ext.mathieu.veyrand@sncf.fr",
+      "password": "$2a$10$tJIcbgRFXPO7WY8P0Q15FeBefN.3titacDXZehbdME1M55HdAoeAi",
+      "id": 1
+    }
+  ]
+}
